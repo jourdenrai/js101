@@ -1,5 +1,4 @@
 let rlSync = require('readline-sync');
-let deck = [[]]
 function total(cards) {
   let values = cards.map(card => card[1]);
 
@@ -20,15 +19,16 @@ function total(cards) {
 function prompt(message) {
   return console.log(`=>${message}`)
 }
-function populateDeck(deck) {
+function initializeDeck() {
   let suits = ['H','D','S','C'];
   let values = ['2','3','4','5','6','7','8','9','10','J','Q','K','A']
-  return suits.map(suit => {
+  return shuffle(suits.map(suit => {
     return values.map(val => {
       return [suit,val]
     })
-  }).reduce((a,b) => a.concat(b),[]);
+  }).reduce((a,b) => a.concat(b),[]));
 }
+
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
@@ -36,58 +36,102 @@ function shuffle(array) {
   }
   return array;
 }
-function getRandomCard(deck) {
-  let randomIndex = Math.floor(Math.random() * deck.length);
-  return deck[randomIndex];
+function getHand(deck) {
+  return [deck.pop(), deck.pop()];
 }
-function busted(total) {
-  return total > 21;
+function busted(cards) {
+  return total(cards) > 21;
 }
-function dealersTurn(dealerCards,deck) {
-  while(true)
-  if(total(dealerCards) < 21) {
-    dealerCards.push(getRandomCard(deck));
-  } else if (total(dealerCards) >= 21) {
-    break;
+function detectResult(dealerCards, playerCards) {
+  let playerTotal = total(playerCards);
+  let dealerTotal = total(dealerCards);
+
+  if (playerTotal > 21) return 'PLAYER_BUSTED';
+  else if (dealerTotal > 21) return 'DEALER_BUSTED';
+  else if (dealerTotal < playerTotal) return 'PLAYER';
+  else if (dealerTotal > playerTotal) return 'DEALER';
+  else return 'TIE';
+}
+
+function displayResults(dealerCards, playerCards) {
+  let result = detectResult(dealerCards, playerCards);
+  switch (result) {
+    case 'PLAYER_BUSTED': 
+      prompt('You busted! Dealer wins!');
+      break;
+    case 'DEALER_BUSTED':
+      prompt('Dealer busted! You win!');
+      break;
+    case 'PLAYER':
+      prompt('You win!');
+      break;
+    case 'DEALER':
+      prompt('Dealer wins!');
+      break;
+    case 'TIE':
+      prompt("It's a tie!");
+      break;
   }
+}
+function playAgain() {
+  prompt('Do you want to play again? y/n')
+  let answer = rlSync.question();
+  return answer.toLowerCase()[0] === 'y';
+}
+function showHand(cards) {
+  return cards.map(card => `${card[1]}${card[0]}`).join(' ');
 }
 while(true) {
-  deck = shuffle(populateDeck(deck));
-  cards = [getRandomCard(deck),getRandomCard(deck)];
-  let cardTotal = total(cards);
-  let dealerCards = [getRandomCard(deck),getRandomCard(deck)]
+  prompt('Welcome to Twenty-One!');
+
+  let deck = initializeDeck();
+  let playerCards = getHand(deck)
+  let dealerCards = getHand(deck)
+
+  prompt(`Dealer has: ${dealerCards[0][1]} and ???`);
+  prompt(`You have: ${playerCards[0][1]}, ${playerCards[1][1]}`);
+  
   while (true) {
-    console.log(`Dealer has: ${dealerCards[0][1]} and unknown card`);
-    cards.forEach(card => {
-      console.log(card[1])
-    })
-    prompt("hit or stay?");
-    let answer = rlSync.question();
-    if(answer[0] === 'h') {
-      cards.push(getRandomCard(deck))
-      cardTotal = total(cards);
+    let playerTurn;
+    while(true) {
+      prompt("hit or stay?");
+      playerTurn = rlSync.question().toLowerCase();
+      if(['h','s'].includes(playerTurn)) break;
+      prompt('must enter h or s')
     }
-    if(answer[0] === 's' || busted(cardTotal)) break;
+  if(playerTurn === 'h') {
+    playerCards.push(deck.pop());
+    prompt('You chose hit!');
+    prompt(`Your cards are now: ${showHand(playerCards)}`);
+    prompt(`Your total is now ${total(playerCards)}`);
   }
 
-  if(busted(cardTotal)) {
-    prompt('You busted! Dealer wins!');
+  if((playerTurn === 's') || busted(playerCards)) break;
+  }
+  if(busted(playerCards)) {
+    displayResults(dealerCards, playerCards);
+    if(playAgain()) {
+      continue;
+    } else break;
   } else{
-    dealersTurn(dealerCards,deck);
-    let dealerTotal = total(dealerCards);
-    if(busted(dealerTotal)) {
-      prompt("Dealer busted. You win!")
-    } else {
-      dealerTotal > cardTotal ? prompt('Dealer Wins!') : prompt('You win!')
-    }
-    
+    prompt(`You stayed at ${total(playerCards)}`);
   }
-  prompt('Would you like to play again? y/n')
-    let choice = rlSync.question();
-    if(choice === 'n') break;
+  while (total(dealerCards) < 17) {
+    prompt('Dealer hits!');
+    dealerCards.push(deck.pop());
+    prompt(`Dealers hand: ${showHand(dealerCards)}`);
+  }
+  if (busted(dealerCards)) {
+    prompt(`Dealer total is now: ${total(dealerCards)}`);
+    displayResults(dealerCards, playerCards);
+    if (playAgain()) {
+      continue;
+    } else break;
+  } else prompt(`Dealer stays at ${total(dealerCards)}`);
   
-  
-  
+  prompt(`Dealer has ${dealerCards}, for a total of: ${total(dealerCards)}`);
+  prompt(`Player has ${playerCards}, for a total of: ${total(playerCards)}`);
+  displayResults(dealerCards, playerCards);
+  if(!playAgain()) break;
 }
-
 
