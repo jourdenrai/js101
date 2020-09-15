@@ -130,14 +130,17 @@ function detectWinner(board) {
 while (true) {
   let playerScore = 0;
   let computerScore = 0;
-  let ans;
+  let choice;
+
   while (true) {
     prompt(`who goes first? player or computer`);
-    ans = rlSync.question().trim().toLowerCase();
-    if (ans[0] === 'p' || ans[0] === 'c') break;
-    prompt(`${ans} is not a valid answer!`);
+    choice = rlSync.question().trim().toLowerCase();
+    if (choice[0] === 'p' || choice[0] === 'c') break;
+    prompt(`${choice} is not a valid answer!`);
   }
-  playerFirst = ans[0] === 'p';
+
+  playerFirst = choice[0] === 'p';
+  
   while (true) {
     let board = initializeBoard();
 
