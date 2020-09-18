@@ -7,6 +7,7 @@ const PROMPT_CHOICES = [
   "(S)pock",
   "(l)izard",
 ];
+
 const WINNING_COMBOS = {
   s: ["p", "l"],
   p: ["r", "S"],
@@ -25,20 +26,20 @@ const NAMES = {
 let playerScore = 0;
 let computerScore = 0;
 
-function prompt(message) {
+function prompt (message) {
   console.log(`=> ${message}`);
 }
-function addScore(name) {
+function addScore (name) {
   if (name === "player") {
     playerScore += 1;
   } else {
     computerScore += 1;
   }
 }
-function choseWinner(winner, loser) {
+function choseWinner (winner, loser) {
   return WINNING_COMBOS[winner].includes(loser);
 }
-function displayResults(choice, computerChoice) {
+function displayResults (choice, computerChoice) {
   if (choice === computerChoice) {
     prompt("It's a tie!");
   } else if (choseWinner(choice, computerChoice)) {
