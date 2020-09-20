@@ -1,0 +1,30 @@
+{
+  "name": "js101",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jourdenrai/js101.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jourdenrai/js101/issues"
+  },
+  "homepage": "https://github.com/jourdenrai/js101#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "eslint": "^7.9.0",
+    "eslint-cli": "^1.1.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {},
+  "keywords": [],
+  "description": ""
+}

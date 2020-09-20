@@ -1,16 +1,16 @@
 function rotateArray(array) {
-  if(!Array.isArray(array)) {
-    return undefined
+  if (!Array.isArray(array)) {
+    return undefined;
   }
-  if(array.length === 0) {
-    return []
+  if (array.length === 0) {
+    return [];
   } else if (array.length > 0) {
-    let result = array.slice()
-    let first = result.shift()
-    result.push(first)
-    return result
+    let result = array.slice();
+    let first = result.shift();
+    result.push(first);
+    return result;
   }
-  
+  return 0;
 }
 
 rotateArray([7, 3, 5, 2, 9, 1]);       // [3, 5, 2, 9, 1, 7]
@@ -26,4 +26,4 @@ rotateArray(1);                        // undefined
 
 let array = [1, 2, 3, 4];
 rotateArray(array);                    // [2, 3, 4, 1]
-array;                                 // [1, 2, 3, 4]
+console.log(array);                              // [1, 2, 3, 4]

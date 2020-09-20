@@ -1,6 +1,6 @@
 function fibonacci(num) {
   let previousTwo = [1, 1];
-  for(let i = 3; i <= num; i ++) {
+  for (let i = 3; i <= num; i++) {
     previousTwo = [previousTwo[1], previousTwo[0] + previousTwo[1]];
 
   }

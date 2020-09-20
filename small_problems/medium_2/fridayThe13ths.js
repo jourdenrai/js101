@@ -1,6 +1,6 @@
 function fridayThe13ths(year) {
   let thirteenths = [];
-  for(let month = 0; month < 12; month++) {
+  for (let month = 0; month < 12; month++) {
     thirteenths.push(new Date(year, month, 13));
   }
 

@@ -3,8 +3,8 @@ function longestSentence(text) {
     return arr.split(' ');
   });
   let longest = wordArr[0];
-  for(let i = 1; i < wordArr.length; i++) {
-    if(wordArr[0].length < wordArr[i].length) {
+  for (let i = 1; i < wordArr.length; i++) {
+    if (wordArr[0].length < wordArr[i].length) {
       longest = wordArr[i].length;
     }
   }

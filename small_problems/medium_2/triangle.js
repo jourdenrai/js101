@@ -6,20 +6,18 @@ function triangle(s1,s2,s3) {
   let middle = array[1];
   let longest = array[2];
 
-  if(isValid(shortest, middle, longest)) {
+  if (isValid(shortest, middle, longest)) {
     return getTriangleType(shortest, middle, longest);
   } else return 'invalid';
-  
 }
 function getTriangleType(shortest, middle, longest) {
-  
   if (shortest === middle && middle === longest) {
     return 'eqilateral';
   } else if (shortest !== middle && middle !== longest) {
     return 'scalene';
   } else if (shortest == middle || shortest === longest || middle === longest) {
     return 'isosceles';
-  }
+  } else return 'error'
 }
 
 function isValid(shortest, middle, longest) {

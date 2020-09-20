@@ -5,18 +5,17 @@ function letterPercentages(string) {
   let stringLength = string.split('').length;
 
   string.split('').forEach(val => {
-    if(val >= 'a' && val <= 'z') {
+    if (val >= 'a' && val <= 'z') {
       lowercaseCount++;
-    } else if( val >= 'A' && val <= 'Z') {
+    } else if ( val >= 'A' && val <= 'Z') {
       uppercaseCount++;
     } else neitherCount++;
   });
-  
   let obj = {
     lowercase: calculatePercentage(lowercaseCount,stringLength),
     uppercase: calculatePercentage(uppercaseCount,stringLength),
     neither: calculatePercentage(neitherCount,stringLength)
-  }
+  };
   return obj;
 }
 

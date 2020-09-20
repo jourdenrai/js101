@@ -18,4 +18,4 @@ function wordToDigit(string) {
   return string;
 }
 
-console.log(wordToDigit('Please call me at five five five one two three four. Thanks.'));
+wordToDigit('Please call me at five five five one two three four. Thanks.');
