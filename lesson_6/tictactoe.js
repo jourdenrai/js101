@@ -140,7 +140,7 @@ while (true) {
   }
 
   playerFirst = choice[0] === 'p';
-  
+
   while (true) {
     let board = initializeBoard();
 
@@ -172,7 +172,7 @@ while (true) {
     } else if (detectWinner(board) === "Computer") {
       computerScore++;
     }
-    prompt(`Player: ${playerScore} Computer: ${computerScore}`);
+    prompt   (`Player: ${playerScore} Computer: ${computerScore}`);
 
     if (playerScore >= GAMES_TO_WIN) {
       prompt('Player wins the series!');

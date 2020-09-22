@@ -19,7 +19,7 @@ function total(cards) {
 
   return sum;
 }
-function prompt  (message) {
+function prompt(message) {
   return console.log(`=>${message}`);
 }
 function initializeDeck() {
@@ -90,7 +90,7 @@ function playAgain() {
 }
 
 function showHand(hand) {
-  return hand
+  return hand;
 }
 
 while (true) {
@@ -150,6 +150,5 @@ while (true) {
   prompt(`Player has ${playerCards}, for a total of: ${playerTotal}`);
 
   displayResults(dealerCards, playerCards);
-  
   if (!playAgain()) break;
 }

@@ -1,5 +1,5 @@
 function rotateRightmostDigits(number, count) {
-  let string = '' + number;
+  let string = String(number);
   let first = string.slice(0, string.length - count);
   let end = string.slice(string.length - count);
   return Number(first + rotate(end));
@@ -12,7 +12,7 @@ function rotate(string) {
 function maxRotation(number) {
   let numberDigits = String(number).length;
   for (let i = numberDigits; i >= 2; i--) {
-    number = rotateRightmostDigits(number, i)
+    number = rotateRightmostDigits(number, i);
   }
   return number;
 }

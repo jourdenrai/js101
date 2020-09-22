@@ -1,7 +1,6 @@
 function minilang(string) {
   let stack = [];
   let register = 0;
-
   string.split(" ").forEach((val) => {
     if (
       stack.length <= 0 &&

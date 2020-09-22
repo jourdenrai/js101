@@ -1,5 +1,5 @@
 function rotateRightmostDigits(number, count) {
-  let string = '' + number;
+  let string = String(number);
   let first = string.slice(0, string.length - count);
   let end = string.slice(string.length - count);
   Number(first + rotate(end));

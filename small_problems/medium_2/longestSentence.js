@@ -1,15 +1,19 @@
 function longestSentence(text) {
-  let wordArr = text.split(/[.?!]/g).map(arr => {
-    return arr.split(' ');
-  });
-  let longest = wordArr[0];
-  for (let i = 1; i < wordArr.length; i++) {
-    if (wordArr[0].length < wordArr[i].length) {
-      longest = wordArr[i].length;
-    }
-  }
-  console.log(longest.join(' ') + '.');
-  console.log(`The longest sentence is ${longest.length} words`);
+  let sentences = text.match(/\w.*?[.!?]/g);
+
+  let longest = sentences.reduce(
+    function(longest,sentence) {
+      let length = sentence.split(/\s/).length;
+      if (length > longest.length) {
+        return {text: sentence, length: length };
+      } else {
+        return longest;
+      }
+    }, {text: '', length: 0}
+  );
+
+  console.log(longest.text + '\n');
+  console.log('The longest sentence has ' + longest.length + ' words.\n');
 }
 
 let longText =

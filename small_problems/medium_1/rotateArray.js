@@ -4,13 +4,8 @@ function rotateArray(array) {
   }
   if (array.length === 0) {
     return [];
-  } else if (array.length > 0) {
-    let result = array.slice();
-    let first = result.shift();
-    result.push(first);
-    return result;
   }
-  return 0;
+  return array.slice(1).concat(array[0]);
 }
 
 rotateArray([7, 3, 5, 2, 9, 1]);       // [3, 5, 2, 9, 1, 7]

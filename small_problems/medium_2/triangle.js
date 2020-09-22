@@ -12,12 +12,10 @@ function triangle(s1,s2,s3) {
 }
 function getTriangleType(shortest, middle, longest) {
   if (shortest === middle && middle === longest) {
-    return 'eqilateral';
+    return 'equilateral';
   } else if (shortest !== middle && middle !== longest) {
     return 'scalene';
-  } else if (shortest == middle || shortest === longest || middle === longest) {
-    return 'isosceles';
-  } else return 'error'
+  } else return 'isosceles';
 }
 
 function isValid(shortest, middle, longest) {
