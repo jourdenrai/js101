@@ -1,24 +1,30 @@
-function featured(num) {
-  let MAX_NUMBER = 9876543201;
-  if (num >= MAX_NUMBER) return 'There is no possible number.';
-  while (true) {
-    num++;
-    if (checkDigits(num) && isValid(num)) break;
-  }
-  return num;
+function featured(number) {
+  const MAX_FEATURED = 9876543201;
+  let featuredNum = toOddMultipleOf7(number);
+
+  do {
+    if (allUnique(featuredNum)) {
+      return featuredNum;
+    }
+    featuredNum += 14;
+  } while (featuredNum < MAX_FEATURED);
+
+  return 'There is no possible number.';
 }
-function checkDigits(num) {
+function toOddMultipleOf7(number) {
+  do {
+    number += 1;
+  } while (number % 2 === 0 || number % 7 !== 0);
+  return number;
+}
+function allUnique(number) {
   let obj = {};
-  String(num).split('').forEach(val => {
+  String(number).split('').forEach(val => {
     if (obj[val]) obj[val] += 1;
     else obj[val] = 1;
   });
   return Object.values(obj).every(n => n <= 1);
 }
-function isValid(num) {
-  return num % 2 === 1 && num % 7 === 0;
-}
-
 featured(12);           // 21
 featured(20);           // 21
 featured(21);           // 35
