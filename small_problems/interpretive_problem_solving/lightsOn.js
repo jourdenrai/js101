@@ -1,5 +1,5 @@
 /*
-/Understand the ProbleM
+/Understand the Problem
 ----------------------
 input: total number of switches
 output: return array of thel ights that are on after count passes
