@@ -1,5 +1,9 @@
 
-const blocks = ['BO', 'XK', 'DQ', 'CP', 'NA', 'GT', 'RE', 'FS', 'JW', 'HU', 'VI', 'LY', 'ZM'];
+const blocks = [
+  'BO', 'XK', 'DQ', 'CP',
+  'NA', 'GT', 'RE', 'FS', 'JW',
+  'HU', 'VI', 'LY', 'ZM'];
+
 function isBlockWord(string) {
   let letters = string.split('').map(letter => letter.toUpperCase());
 
@@ -14,6 +18,7 @@ function isBlockWord(string) {
   }
   return true;
 }
+
 isBlockWord('BATCH');      // true
 isBlockWord('BUTCH');      // false
 isBlockWord('jest');       // true
