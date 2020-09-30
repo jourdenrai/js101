@@ -1,23 +1,15 @@
-
-const blocks = [
-  'BO', 'XK', 'DQ', 'CP',
-  'NA', 'GT', 'RE', 'FS', 'JW',
-  'HU', 'VI', 'LY', 'ZM'];
-
-function isBlockWord(string) {
-  let letters = string.split('').map(letter => letter.toUpperCase());
-
-  for (let i = 0; i < letters.length; i += 1) {
-    let matchingBlock = blocks.filter(block => {
-      return block.indexOf(letters[i]) > -1;
-    })[0];
-
-    if (matchingBlock === undefined) {
-      return false;
-    } else blocks.splice(blocks.indexOf(matchingBlock), 1);
+const isBlockWord = (word) => {
+  let blocks = [
+    'BO', 'XK', 'DQ', 'CP',
+    'NA', 'GT', 'RE', 'FS',
+    'JW', 'HU', 'VI', 'LY', 'ZM'];
+  for (let letter of word.toUpperCase()) {
+    let blocksLengthBefore = blocks.length;
+    blocks = blocks.filter(block => !block.includes(letter));
+    if (blocksLengthBefore === blocks.length) return false;
   }
   return true;
-}
+};
 
 isBlockWord('BATCH');      // true
 isBlockWord('BUTCH');      // false
